@@ -15,7 +15,7 @@ const readable = process.argv.includes('--readable'), packed = process.argv.incl
 let js = FILES.map((f) => readFileSync(path.join(here, 'src', f), 'utf8')).join('\n');
 const tpl = readFileSync(path.join(here, 'template.html'), 'utf8');
 // vše běží v jedné asynchronní funkci (na začátku se čeká na uložený svět); chyba při startu se ukáže na úvodní obrazovce
-const wrap = (body) => `(async()=>{try{${body}\n}catch(e){console.error(e);document.body.className='l';document.getElementById('go').hidden=1;document.getElementById('s').textContent=(e.cause?'':document.documentElement.lang=='cs'?'Nepodařilo se spustit: ':'Could not start: ')+e.message}})()`;
+const wrap = (body) => `(async()=>{try{${body}\n}catch(e){console.error(e);document.body.className='l';document.getElementById('go').hidden=1;document.getElementById('s').textContent=(e.cause?'':({cs:'Nepodařilo se spustit: ',de:'Start fehlgeschlagen: '})[document.documentElement.lang]||'Could not start: ')+e.message}})()`;
 const report = (name, html) => console.log(`${name}: ${(html.length / 1024).toFixed(1)} kB, ${(gzipSync(Buffer.from(html), { level: 9 }).length / 1024).toFixed(1)} kB po gzipu`);
 
 let html, code;

@@ -2,7 +2,7 @@
 
 [English](README.md) · Česky · [Deutsch](README.de.md)
 
-Živý řez mravenčí kolonií v prohlížeči. Půdu, chodby, mravence, rostliny, oblohu i zvuk počítá kód, není tu jediný obrázek ani nahrávka. Celé se to vejde do jednoho HTML souboru o velikosti 62 kB (27 kB po gzipu).
+Živý řez mravenčí kolonií v prohlížeči. Půdu, chodby, mravence, rostliny, oblohu i zvuk počítá kód, není tu jediný obrázek ani nahrávka. Celé se to vejde do jednoho HTML souboru o velikosti 64 kB (28 kB po gzipu).
 
 **[Otevřít živou verzi](https://daliborkania-info.github.io/anthill/)**
 
@@ -12,7 +12,7 @@ Inspirace: [Abyssal Garden](https://github.com/Noniv/abyssal-garden), podmořsk�
 
 Otevři [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/) v prohlížeči (Chrome, Edge, Firefox, Safari; stačí WebGL 2). Nic se neinstaluje.
 
-[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) je tentýž program, jen je skript zabalený a v prohlížeči se sám rozbalí. Má 38 kB.
+[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) je tentýž program, jen je skript zabalený a v prohlížeči se sám rozbalí. Má 39 kB.
 
 Svět je daný semínkem. [Adresa s `#5` na konci](https://daliborkania-info.github.io/anthill/#5) vygeneruje pokaždé stejnou krajinu, bez čísla vznikne náhodná.
 
@@ -41,13 +41,15 @@ Stav kolonie se ukládá do prohlížeče (IndexedDB) každých 20 sekund, při 
 
 Uložený stav patří k adrese, ze které stránka běží. Kopie otevřená z jiné adresy nebo ze souboru na disku má svou vlastní kolonii.
 
-Texty jsou česky a anglicky. Jazyk se vybere podle nastavení systému (čeština i pro slovenštinu, jinak angličtina) a tlačítkem v liště ho jde přepnout. Volba se pamatuje, stejně jako rychlost, zvuk a popisky.
+Texty jsou česky, anglicky a německy. Jazyk se vybere podle nastavení systému (čeština i pro slovenštinu, němčina pro němčinu, jinak angličtina) a tlačítko v liště všechny tři střídá. Volba se pamatuje, stejně jako rychlost, zvuk a popisky.
 
 ## Instalace jako aplikace (PWA)
 
 Otevři [živou stránku](https://daliborkania-info.github.io/anthill/) v Chromu nebo Edgi a v adresním řádku zvol Instalovat. Na telefonu je to v nabídce prohlížeče položka Přidat na plochu. Service worker si stránku uloží, takže nainstalovaná aplikace naběhne i bez připojení, a kdykoli je online, vezme si aktuální verzi.
 
-Soubory, které to umožňují, leží vedle `index.html`: `manifest.webmanifest`, `sw.js` a ikony.
+Nainstalovaná aplikace se jmenuje podle jazyka, který je při instalaci zvolený: Mraveniště, Anthill nebo Ameisenhügel.
+
+Soubory, které to umožňují, leží vedle `index.html`: manifest pro každý jazyk, `sw.js` a ikony.
 
 ## Co se tam děje
 
@@ -92,11 +94,11 @@ Ikony se dělají z `source/icon.svg` nástrojem `rsvg-convert` (velikosti 192 a
 | Soubor | Co v něm je |
 |---|---|
 | `source/src/sim.js` | Svět, plánování hnízda, hledání cest a chování kolonie, uložení a obnova stavu. Jde pustit i v Node. |
-| `source/src/prefs.js` | Zapamatované volby a texty v obou jazycích |
+| `source/src/prefs.js` | Zapamatované volby a texty ve všech třech jazycích |
 | `source/src/store.js` | Uložený svět v IndexedDB, při startu ho načte nebo založí nový |
 | `source/src/bake.js` | Modely mravenců, plodu, potravy a rostlin, které se při startu vypočítají do textury |
 | `source/src/gfx.js` | Shader půdy, chodeb a oblohy, nasvícené sprity se stíny, závěrečné úpravy obrazu |
 | `source/src/audio.js` | Zvuk skládaný za běhu |
 | `source/src/main.js` | Kamera, ovládání, pauza, ukládání, skrývání panelů, panel s čísly |
 | `source/template.html` | Stránka kolem simulace a její styly |
-| `manifest.webmanifest`, `sw.js`, `icon-*.png` | Soubory pro instalaci jako aplikace |
+| `manifest*.webmanifest`, `sw.js`, `icon-*.png` | Soubory pro instalaci jako aplikace |

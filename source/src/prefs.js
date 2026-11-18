@@ -1,13 +1,13 @@
-// ===== prefs.js: zapamatované volby a texty česky a anglicky =====
+// ===== prefs.js: zapamatované volby a texty česky, anglicky a německy =====
 // Volby (jazyk, zvuk, popisky, plán, rychlost) žijí v localStorage. Selhání úložiště (soukromé okno apod.) se tiše přejde.
 const cfg = (() => { try { return JSON.parse(localStorage.mraveniste) || {}; } catch (e) { return {}; } })();
 const saveCfg = () => { try { localStorage.mraveniste = JSON.stringify(cfg); } catch (e) { } };
 
-// Jazyk se bere z nastavení systému (prohlížeče), volba tlačítkem ho přepíše a zapamatuje se.
+// Jazyk se bere z nastavení systému (prohlížeče), tlačítko v liště jazyky střídá a volba se zapamatuje.
 // Prvky stránky s data-t dostanou text, s data-h bublinu (title). V textech se {x} nahrazuje hodnotou.
 const TEXTS = {
   cs: {
-    title: 'Mraveniště', other: 'English',
+    title: 'Mraveniště', code: 'CS',
     sub: 'Řez živou kolonií. Půdu, chodby, mravence i zvuk počítá kód v téhle jedné stránce, bez jediného obrázku nebo nahrávky.',
     go: 'Nahlédnout dovnitř', cont: 'Pokračovat', saved: 'Uložená kolonie: den {d}, dělnic {n}',
     help: 'Tažením posouváš, kolečkem přibližuješ. Klikni na mravence a sleduj ho, klikni do vzduchu a hoď kolonii drobek. Klávesy 1 až 4 zrychlují čas, mezerník všechno zastaví.',
@@ -23,7 +23,7 @@ const TEXTS = {
     gl2: 'Tahle simulace potřebuje WebGL 2. Zkus aktuální Chrome, Edge nebo Firefox.'
   },
   en: {
-    title: 'Anthill', other: 'Česky',
+    title: 'Anthill', code: 'EN',
     sub: 'A cross-section of a living colony. The soil, the tunnels, the ants and the sound are all computed by code in this one page, without a single image or recording.',
     go: 'Look inside', cont: 'Continue', saved: 'Saved colony: day {d}, {n} workers',
     help: 'Drag to pan, scroll to zoom. Click an ant to follow it, click the air to drop the colony a crumb. Keys 1 to 4 speed up time, Space stops everything.',
@@ -37,6 +37,22 @@ const TEXTS = {
       'fetching brood from the queen', 'fetching food for a larva', 'fetching food for the queen', 'moving brood to the nursery', 'bringing food to a larva', 'bringing food to the queen',
       'storing food in the pantry', 'resting', 'wandering the nest'],
     gl2: 'This simulation needs WebGL 2. Try a current Chrome, Edge or Firefox.'
+  },
+  de: {
+    title: 'Ameisenhügel', code: 'DE',
+    sub: 'Ein Querschnitt durch eine lebende Kolonie. Erde, Gänge, Ameisen und Ton berechnet der Code auf dieser einen Seite, ganz ohne Bilder oder Aufnahmen.',
+    go: 'Hineinschauen', cont: 'Weiter', saved: 'Gespeicherte Kolonie: Tag {d}, {n} Arbeiterinnen',
+    help: 'Ziehen verschiebt, das Mausrad zoomt. Klicke auf eine Ameise, um ihr zu folgen, oder in die Luft, um der Kolonie einen Krümel zuzuwerfen. Die Tasten 1 bis 4 beschleunigen die Zeit, die Leertaste hält alles an.',
+    workers: 'Arbeiterinnen', brood: 'Eier · Larven · Puppen', food: 'Futtervorrat', rooms: 'Fertige Kammern', jobs: 'Graben · Sammeln · Pflegen · Frei',
+    pause: 'Pause', resume: 'Weiter', labels: 'Beschriftung', plan: 'Bauplan', sound: 'Ton', fresh: 'Neue Welt', space: 'Leertaste',
+    freshQ: 'Wirklich eine neue Welt beginnen? Die jetzige Kolonie wird gelöscht.',
+    day: 'Tag', paused: 'angehalten', dig: '{n} % ausgehoben',
+    names: ['Königin', 'Vorratskammer', 'Brutkammer', 'Ruhekammer'],
+    queen: 'Königin · legt Eier, solange die Ammen sie füttern', worker: 'Arbeiterin Nr. {n} · {a} · Alter {t}',
+    act: ['geht graben', 'gräbt', 'trägt Erde hinaus', 'geht zur Futtersuche nach oben', 'schüttet Erde auf den Wall', 'trägt Futter heim und markiert den Weg', 'kehrt ins Nest zurück', 'sucht Futter', 'nimmt einen Bissen auf',
+      'holt Brut bei der Königin', 'holt Futter für eine Larve', 'holt Futter für die Königin', 'trägt Brut in die Brutkammer', 'bringt einer Larve Futter', 'bringt der Königin Futter',
+      'lagert Futter in der Vorratskammer ein', 'ruht', 'läuft durchs Nest'],
+    gl2: 'Diese Simulation braucht WebGL 2. Versuche es mit einem aktuellen Chrome, Edge oder Firefox.'
   }
 };
 let lang, T;
@@ -46,5 +62,8 @@ function setLang(l) {
   document.documentElement.lang = l; document.title = T.title;
   for (const e of document.querySelectorAll('[data-t]')) e.textContent = T[e.dataset.t];
   for (const e of document.querySelectorAll('[data-h]')) e.title = T[e.dataset.h];
+  // nainstalovaná aplikace se jmenuje podle jazyka: každý jazyk má svůj manifest
+  document.querySelector('link[rel=manifest]').href = l == 'en' ? 'manifest.webmanifest' : `manifest.${l}.webmanifest`;
 }
-setLang(TEXTS[cfg.lang] ? cfg.lang : /^(cs|sk)\b/i.test(navigator.language) ? 'cs' : 'en');
+const sys = (navigator.language || '').slice(0, 2).toLowerCase();  // slovenština dostane češtinu, neznámý jazyk angličtinu
+setLang(TEXTS[cfg.lang] ? cfg.lang : sys == 'sk' ? 'cs' : TEXTS[sys] ? sys : 'en');

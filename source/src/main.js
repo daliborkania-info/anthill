@@ -101,7 +101,7 @@ $('b0').onclick = () => setPause(!paused);
 $('bl').onclick = () => { tog('bl', cfg.lab = showLab ^= 1); saveCfg(); redraw(); };
 $('bp').onclick = () => { tog('bp', cfg.plan = showPlan ^= 1); saveCfg(); redraw(); };
 $('bs').onclick = () => { tog('bs', cfg.snd = sndOn ^= 1); saveCfg(); syncAudio(1); };
-$('bg').onclick = () => { setLang(cfg.lang = lang == 'cs' ? 'en' : 'cs'); saveCfg(); ui(); };
+$('bg').onclick = () => { const all = Object.keys(TEXTS); setLang(cfg.lang = all[(all.indexOf(lang) + 1) % all.length]); saveCfg(); ui(); };
 $('bn').onclick = askFresh;
 $('go').onclick = () => { body.className = ''; clearTimeout(idleT); idleT = 0; wake(); if (paused) setPause(0); syncAudio(1); if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => { }); };
 addEventListener('keydown', e => {

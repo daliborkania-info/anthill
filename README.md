@@ -2,7 +2,7 @@
 
 English · [Česky](README.cs.md) · [Deutsch](README.de.md)
 
-A living cross-section of an ant colony in the browser. The soil, the tunnels, the ants, the plants, the sky and the sound are all computed by code. There is not a single image or recording. The whole thing fits into one HTML file of 62 kB (27 kB gzipped).
+A living cross-section of an ant colony in the browser. The soil, the tunnels, the ants, the plants, the sky and the sound are all computed by code. There is not a single image or recording. The whole thing fits into one HTML file of 64 kB (28 kB gzipped).
 
 **[Open the live version](https://daliborkania-info.github.io/anthill/)**
 
@@ -12,7 +12,7 @@ Inspired by [Abyssal Garden](https://github.com/Noniv/abyssal-garden), an underw
 
 Open [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/) in a browser (Chrome, Edge, Firefox, Safari; WebGL 2 is all it needs). Nothing to install.
 
-[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) is the same program with the script compressed. It unpacks itself in the browser and weighs 38 kB.
+[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) is the same program with the script compressed. It unpacks itself in the browser and weighs 39 kB.
 
 The world is defined by a seed. [The address with `#5` at the end](https://daliborkania-info.github.io/anthill/#5) generates the same landscape every time, without a number you get a random one.
 
@@ -41,13 +41,15 @@ The state of the colony is saved in the browser (IndexedDB) every 20 seconds, on
 
 The saved state belongs to the address the page runs from. A copy opened from another address or from a file on disk has a colony of its own.
 
-The interface is in Czech and English. The language follows the system setting (Czech for Czech and Slovak, English otherwise) and a button in the bar switches it. The choice is remembered, and so are speed, sound and labels.
+The interface is in Czech, English and German. The language follows the system setting (Czech for Czech and Slovak, German for German, English otherwise) and a button in the bar cycles through the three. The choice is remembered, and so are speed, sound and labels.
 
 ## Installing it as an app (PWA)
 
 Open [the live page](https://daliborkania-info.github.io/anthill/) in Chrome or Edge and choose Install in the address bar. On a phone, use Add to Home screen in the browser menu. The service worker keeps a copy of the page, so the installed app starts without a connection too, and it picks up the current version whenever it is online.
 
-The files that make this possible sit next to `index.html`: `manifest.webmanifest`, `sw.js` and the icons.
+The installed app takes its name from the language that is active when you install it: Mraveniště, Anthill or Ameisenhügel.
+
+The files that make this possible sit next to `index.html`: one manifest per language, `sw.js` and the icons.
 
 ## What goes on in there
 
@@ -94,11 +96,11 @@ Comments in the source code are in Czech.
 | File | What is in it |
 |---|---|
 | `source/src/sim.js` | The world, nest planning, pathfinding and colony behaviour, saving and restoring state. Runs in Node too. |
-| `source/src/prefs.js` | Remembered settings and the texts in both languages |
+| `source/src/prefs.js` | Remembered settings and the texts in all three languages |
 | `source/src/store.js` | The saved world in IndexedDB; loads it at start-up or creates a new one |
 | `source/src/bake.js` | Models of ants, brood, food and plants, computed into a texture at start-up |
 | `source/src/gfx.js` | The shader for soil, tunnels and sky, lit sprites with shadows, post-processing |
 | `source/src/audio.js` | Sound synthesised at run time |
 | `source/src/main.js` | Camera, controls, pause, saving, hiding the panels, the stats panel |
 | `source/template.html` | The page around the simulation and its styles |
-| `manifest.webmanifest`, `sw.js`, `icon-*.png` | Files for installing it as an app |
+| `manifest*.webmanifest`, `sw.js`, `icon-*.png` | Files for installing it as an app |

@@ -2,19 +2,17 @@
 
 [English](README.md) · [Česky](README.cs.md) · Deutsch
 
-Ein lebendiger Querschnitt durch eine Ameisenkolonie im Browser. Erde, Gänge, Ameisen, Pflanzen, Himmel und Ton werden vollständig vom Code berechnet. Es gibt kein einziges Bild und keine Aufnahme. Das Ganze passt in eine einzige HTML-Datei mit 62 kB (27 kB mit gzip).
+Ein lebendiger Querschnitt durch eine Ameisenkolonie im Browser. Erde, Gänge, Ameisen, Pflanzen, Himmel und Ton werden vollständig vom Code berechnet. Es gibt kein einziges Bild und keine Aufnahme. Das Ganze passt in eine einzige HTML-Datei mit 64 kB (28 kB mit gzip).
 
 **[Live-Version öffnen](https://daliborkania-info.github.io/anthill/)**
 
 Vorbild war [Abyssal Garden](https://github.com/Noniv/abyssal-garden), eine Unterwasserwelt in einer einzigen Datei mit 97 kB.
 
-Die Oberfläche der Anwendung gibt es bisher auf Tschechisch und Englisch, eine deutsche Übersetzung ist geplant. Die Namen der Schaltflächen stehen hier deshalb auf Englisch.
-
 ## Starten
 
 Öffne [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/) im Browser (Chrome, Edge, Firefox, Safari; WebGL 2 genügt). Es muss nichts installiert werden.
 
-[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) ist dasselbe Programm mit komprimiertem Skript. Es entpackt sich im Browser selbst und hat 38 kB.
+[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) ist dasselbe Programm mit komprimiertem Skript. Es entpackt sich im Browser selbst und hat 39 kB.
 
 Die Welt wird durch einen Startwert (Seed) bestimmt. [Die Adresse mit `#5` am Ende](https://daliborkania-info.github.io/anthill/#5) erzeugt jedes Mal dieselbe Landschaft, ohne Zahl entsteht eine zufällige.
 
@@ -39,17 +37,19 @@ Die Anzeige mit den Zahlen und die Leiste mit den Schaltflächen verschwinden na
 
 Die Pause hält alles an. Die Zeichenschleife läuft nicht, die Tonausgabe ruht, und die Seite belastet weder Prozessor noch Grafikkarte. Verschieben, Zoomen oder eine Größenänderung des Fensters zeichnet während der Pause genau ein Bild neu.
 
-Der Zustand der Kolonie wird alle 20 Sekunden, beim Pausieren und beim Schließen oder Verbergen des Fensters im Browser gespeichert (IndexedDB). Beim nächsten Öffnen bietet die Seite Continue an, und die Welt macht genau dort weiter, wo sie aufgehört hat, samt Bildausschnitt und verfolgter Ameise. Bis zum Klick auf Continue steht sie still. Die Zeit, in der die Seite geschlossen war, wird nicht nachgeholt. Die Schaltfläche New world löscht den gespeicherten Zustand und beginnt von vorn. Eine Welt, die mit einem Startwert in der Adresse geöffnet wird (`#5`), hat ihren eigenen Speicherplatz und überschreibt die Hauptkolonie nicht.
+Der Zustand der Kolonie wird alle 20 Sekunden, beim Pausieren und beim Schließen oder Verbergen des Fensters im Browser gespeichert (IndexedDB). Beim nächsten Öffnen bietet die Seite Weiter an, und die Welt macht genau dort weiter, wo sie aufgehört hat, samt Bildausschnitt und verfolgter Ameise. Bis zum Klick auf Weiter steht sie still. Die Zeit, in der die Seite geschlossen war, wird nicht nachgeholt. Die Schaltfläche Neue Welt löscht den gespeicherten Zustand und beginnt von vorn. Eine Welt, die mit einem Startwert in der Adresse geöffnet wird (`#5`), hat ihren eigenen Speicherplatz und überschreibt die Hauptkolonie nicht.
 
 Der gespeicherte Zustand gehört zu der Adresse, unter der die Seite läuft. Eine Kopie, die unter einer anderen Adresse oder aus einer Datei auf der Festplatte geöffnet wird, hat ihre eigene Kolonie.
 
-Die Sprache richtet sich nach der Systemeinstellung (Tschechisch bei Tschechisch und Slowakisch, sonst Englisch) und lässt sich mit einer Schaltfläche in der Leiste umschalten. Die Wahl wird gemerkt, ebenso Geschwindigkeit, Ton und Beschriftung.
+Die Oberfläche gibt es auf Tschechisch, Englisch und Deutsch. Die Sprache richtet sich nach der Systemeinstellung (Tschechisch bei Tschechisch und Slowakisch, Deutsch bei Deutsch, sonst Englisch), und eine Schaltfläche in der Leiste wechselt zwischen den dreien. Die Wahl wird gemerkt, ebenso Geschwindigkeit, Ton und Beschriftung.
 
 ## Als App installieren (PWA)
 
 Öffne [die Live-Seite](https://daliborkania-info.github.io/anthill/) in Chrome oder Edge und wähle in der Adressleiste Installieren. Auf dem Handy steht im Menü des Browsers der Punkt Zum Startbildschirm hinzufügen. Der Service Worker bewahrt eine Kopie der Seite auf, die installierte App startet also auch ohne Verbindung und holt sich die aktuelle Version, sobald sie online ist.
 
-Die Dateien, die das möglich machen, liegen neben `index.html`: `manifest.webmanifest`, `sw.js` und die Symbole.
+Die installierte App heißt so wie in der Sprache, die beim Installieren eingestellt ist: Mraveniště, Anthill oder Ameisenhügel.
+
+Die Dateien, die das möglich machen, liegen neben `index.html`: ein Manifest je Sprache, `sw.js` und die Symbole.
 
 ## Was dort passiert
 
@@ -96,11 +96,11 @@ Die Kommentare im Quelltext sind auf Tschechisch.
 | Datei | Inhalt |
 |---|---|
 | `source/src/sim.js` | Die Welt, Nestplanung, Wegfindung und Verhalten der Kolonie, Speichern und Wiederherstellen des Zustands. Läuft auch in Node. |
-| `source/src/prefs.js` | Gemerkte Einstellungen und die Texte in beiden Sprachen |
+| `source/src/prefs.js` | Gemerkte Einstellungen und die Texte in allen drei Sprachen |
 | `source/src/store.js` | Die gespeicherte Welt in IndexedDB; lädt sie beim Start oder legt eine neue an |
 | `source/src/bake.js` | Modelle von Ameisen, Brut, Nahrung und Pflanzen, die beim Start in eine Textur berechnet werden |
 | `source/src/gfx.js` | Shader für Erde, Gänge und Himmel, beleuchtete Sprites mit Schatten, Nachbearbeitung des Bildes |
 | `source/src/audio.js` | Zur Laufzeit erzeugter Ton |
 | `source/src/main.js` | Kamera, Bedienung, Pause, Speichern, Ausblenden der Anzeigen, Anzeige mit den Zahlen |
 | `source/template.html` | Die Seite um die Simulation und ihre Stile |
-| `manifest.webmanifest`, `sw.js`, `icon-*.png` | Dateien für die Installation als App |
+| `manifest*.webmanifest`, `sw.js`, `icon-*.png` | Dateien für die Installation als App |

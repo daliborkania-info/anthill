@@ -1,7 +1,7 @@
 // Service worker pro nainstalovanou aplikaci (PWA).
 // Když je server dostupný, bere se čerstvá verze ze sítě a uloží se do mezipaměti; bez sítě se použije poslední uložená.
 const CACHE = 'mraveniste-1';
-const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable.png'];
+const FILES = ['./', 'index.html', 'manifest.webmanifest', 'manifest.cs.webmanifest', 'manifest.de.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable.png'];
 
 self.addEventListener('install', e => {
   self.skipWaiting();
