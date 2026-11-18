@@ -4,15 +4,19 @@ English · [Česky](README.cs.md) · [Deutsch](README.de.md)
 
 A living cross-section of an ant colony in the browser. The soil, the tunnels, the ants, the plants, the sky and the sound are all computed by code. There is not a single image or recording. The whole thing fits into one HTML file of 62 kB (27 kB gzipped).
 
+**[Open the live version](https://daliborkania-info.github.io/anthill/)**
+
 Inspired by [Abyssal Garden](https://github.com/Noniv/abyssal-garden), an underwater world in a single 97 kB file.
 
 ## Running it
 
-Open `index.html` in a browser (Chrome, Edge, Firefox, Safari; WebGL 2 is all it needs). Nothing to install, and it works offline.
+Open [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/) in a browser (Chrome, Edge, Firefox, Safari; WebGL 2 is all it needs). Nothing to install.
 
-`index.packed.html` is the same program with the script compressed. It unpacks itself in the browser and weighs 38 kB.
+[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) is the same program with the script compressed. It unpacks itself in the browser and weighs 38 kB.
 
-The world is defined by a seed. `index.html#5` generates the same landscape every time, without a number you get a random one.
+The world is defined by a seed. [The address with `#5` at the end](https://daliborkania-info.github.io/anthill/#5) generates the same landscape every time, without a number you get a random one.
+
+The page is one self-contained file, so a downloaded `index.html` also runs straight from disk, offline.
 
 ## Controls
 
@@ -35,19 +39,15 @@ Pause stops everything. The render loop does not run, the audio engine is suspen
 
 The state of the colony is saved in the browser (IndexedDB) every 20 seconds, on pause, and when the window is closed or hidden. The next time you open the page it offers Continue, and the world picks up exactly where it stopped, including the view and the ant you were following. It stays frozen until you click Continue. Time that passed while the page was closed is not caught up. The New world button deletes the saved state and starts over. A world opened with a seed in the address (`#5`) has its own save slot, so it does not overwrite the main colony.
 
-The saved state belongs to the address the page runs from. On a different address or port the colony starts from scratch.
+The saved state belongs to the address the page runs from. A copy opened from another address or from a file on disk has a colony of its own.
 
 The interface is in Czech and English. The language follows the system setting (Czech for Czech and Slovak, English otherwise) and a button in the bar switches it. The choice is remembered, and so are speed, sound and labels.
 
 ## Installing it as an app (PWA)
 
-Next to `index.html` there are `manifest.webmanifest`, `sw.js` and the icons. With them the page can be installed as a standalone app. Browsers allow that only from a server (https or localhost), not from a file on disk:
+Open [the live page](https://daliborkania-info.github.io/anthill/) in Chrome or Edge and choose Install in the address bar. On a phone, use Add to Home screen in the browser menu. The service worker keeps a copy of the page, so the installed app starts without a connection too, and it picks up the current version whenever it is online.
 
-```bash
-python3 -m http.server 8765 --bind 127.0.0.1
-```
-
-Then open `http://localhost:8765/` in Chrome or Edge and choose Install in the address bar. The service worker keeps a copy of the page, so the installed app starts even when the server is not running. When the server is running, it picks up the current version from it.
+The files that make this possible sit next to `index.html`: `manifest.webmanifest`, `sw.js` and the icons.
 
 ## What goes on in there
 
@@ -73,7 +73,7 @@ The repository contains a ready workflow, `.github/workflows/pages.yml`. It buil
 gh workflow run pages.yml
 ```
 
-The page then runs at `https://daliborkania-info.github.io/anthill/` and can be installed as an app from that address, with no server of your own.
+The page then runs at [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
 
 ## Editing and building
 

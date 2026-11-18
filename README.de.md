@@ -4,17 +4,21 @@
 
 Ein lebendiger Querschnitt durch eine Ameisenkolonie im Browser. Erde, Gänge, Ameisen, Pflanzen, Himmel und Ton werden vollständig vom Code berechnet. Es gibt kein einziges Bild und keine Aufnahme. Das Ganze passt in eine einzige HTML-Datei mit 62 kB (27 kB mit gzip).
 
+**[Live-Version öffnen](https://daliborkania-info.github.io/anthill/)**
+
 Vorbild war [Abyssal Garden](https://github.com/Noniv/abyssal-garden), eine Unterwasserwelt in einer einzigen Datei mit 97 kB.
 
 Die Oberfläche der Anwendung gibt es bisher auf Tschechisch und Englisch, eine deutsche Übersetzung ist geplant. Die Namen der Schaltflächen stehen hier deshalb auf Englisch.
 
 ## Starten
 
-Öffne `index.html` im Browser (Chrome, Edge, Firefox, Safari; WebGL 2 genügt). Es muss nichts installiert werden, und es läuft offline.
+Öffne [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/) im Browser (Chrome, Edge, Firefox, Safari; WebGL 2 genügt). Es muss nichts installiert werden.
 
-`index.packed.html` ist dasselbe Programm mit komprimiertem Skript. Es entpackt sich im Browser selbst und hat 38 kB.
+[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) ist dasselbe Programm mit komprimiertem Skript. Es entpackt sich im Browser selbst und hat 38 kB.
 
-Die Welt wird durch einen Startwert (Seed) bestimmt. `index.html#5` erzeugt jedes Mal dieselbe Landschaft, ohne Zahl entsteht eine zufällige.
+Die Welt wird durch einen Startwert (Seed) bestimmt. [Die Adresse mit `#5` am Ende](https://daliborkania-info.github.io/anthill/#5) erzeugt jedes Mal dieselbe Landschaft, ohne Zahl entsteht eine zufällige.
+
+Die Seite ist eine einzige, in sich geschlossene Datei. Eine heruntergeladene `index.html` läuft deshalb auch direkt von der Festplatte und offline.
 
 ## Bedienung
 
@@ -37,19 +41,15 @@ Die Pause hält alles an. Die Zeichenschleife läuft nicht, die Tonausgabe ruht,
 
 Der Zustand der Kolonie wird alle 20 Sekunden, beim Pausieren und beim Schließen oder Verbergen des Fensters im Browser gespeichert (IndexedDB). Beim nächsten Öffnen bietet die Seite Continue an, und die Welt macht genau dort weiter, wo sie aufgehört hat, samt Bildausschnitt und verfolgter Ameise. Bis zum Klick auf Continue steht sie still. Die Zeit, in der die Seite geschlossen war, wird nicht nachgeholt. Die Schaltfläche New world löscht den gespeicherten Zustand und beginnt von vorn. Eine Welt, die mit einem Startwert in der Adresse geöffnet wird (`#5`), hat ihren eigenen Speicherplatz und überschreibt die Hauptkolonie nicht.
 
-Der gespeicherte Zustand gehört zu der Adresse, unter der die Seite läuft. Unter einer anderen Adresse oder einem anderen Port beginnt die Kolonie von vorn.
+Der gespeicherte Zustand gehört zu der Adresse, unter der die Seite läuft. Eine Kopie, die unter einer anderen Adresse oder aus einer Datei auf der Festplatte geöffnet wird, hat ihre eigene Kolonie.
 
 Die Sprache richtet sich nach der Systemeinstellung (Tschechisch bei Tschechisch und Slowakisch, sonst Englisch) und lässt sich mit einer Schaltfläche in der Leiste umschalten. Die Wahl wird gemerkt, ebenso Geschwindigkeit, Ton und Beschriftung.
 
 ## Als App installieren (PWA)
 
-Neben `index.html` liegen `manifest.webmanifest`, `sw.js` und die Symbole. Damit lässt sich die Seite als eigenständige App installieren. Browser erlauben das nur von einem Server (https oder localhost), nicht von einer Datei auf der Festplatte:
+Öffne [die Live-Seite](https://daliborkania-info.github.io/anthill/) in Chrome oder Edge und wähle in der Adressleiste Installieren. Auf dem Handy steht im Menü des Browsers der Punkt Zum Startbildschirm hinzufügen. Der Service Worker bewahrt eine Kopie der Seite auf, die installierte App startet also auch ohne Verbindung und holt sich die aktuelle Version, sobald sie online ist.
 
-```bash
-python3 -m http.server 8765 --bind 127.0.0.1
-```
-
-Öffne danach `http://localhost:8765/` in Chrome oder Edge und wähle in der Adressleiste Installieren. Der Service Worker bewahrt eine Kopie der Seite auf, die installierte App startet also auch dann, wenn der Server nicht läuft. Läuft er, holt sie sich von dort die aktuelle Version.
+Die Dateien, die das möglich machen, liegen neben `index.html`: `manifest.webmanifest`, `sw.js` und die Symbole.
 
 ## Was dort passiert
 
@@ -75,7 +75,7 @@ Im Repository liegt ein fertiger Workflow, `.github/workflows/pages.yml`. Er bau
 gh workflow run pages.yml
 ```
 
-Die Seite läuft dann unter `https://daliborkania-info.github.io/anthill/` und lässt sich von dieser Adresse aus auch als App installieren, ganz ohne eigenen Server.
+Die Seite läuft dann unter [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
 
 ## Ändern und Bauen
 

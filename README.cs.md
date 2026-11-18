@@ -4,15 +4,19 @@
 
 Živý řez mravenčí kolonií v prohlížeči. Půdu, chodby, mravence, rostliny, oblohu i zvuk počítá kód, není tu jediný obrázek ani nahrávka. Celé se to vejde do jednoho HTML souboru o velikosti 62 kB (27 kB po gzipu).
 
+**[Otevřít živou verzi](https://daliborkania-info.github.io/anthill/)**
+
 Inspirace: [Abyssal Garden](https://github.com/Noniv/abyssal-garden), podmořský svět v jednom souboru o 97 kB.
 
 ## Spuštění
 
-Otevři `index.html` v prohlížeči (Chrome, Edge, Firefox, Safari; stačí WebGL 2). Nic se neinstaluje a funguje to offline.
+Otevři [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/) v prohlížeči (Chrome, Edge, Firefox, Safari; stačí WebGL 2). Nic se neinstaluje.
 
-`index.packed.html` je tentýž program, jen je skript zabalený a v prohlížeči se sám rozbalí. Má 38 kB.
+[index.packed.html](https://daliborkania-info.github.io/anthill/index.packed.html) je tentýž program, jen je skript zabalený a v prohlížeči se sám rozbalí. Má 38 kB.
 
-Svět je daný semínkem. `index.html#5` vygeneruje pokaždé stejnou krajinu, bez čísla vznikne náhodná.
+Svět je daný semínkem. [Adresa s `#5` na konci](https://daliborkania-info.github.io/anthill/#5) vygeneruje pokaždé stejnou krajinu, bez čísla vznikne náhodná.
+
+Stránka je jediný soběstačný soubor, takže stažený `index.html` běží i přímo z disku a bez připojení.
 
 ## Ovládání
 
@@ -35,19 +39,15 @@ Pauza zastaví všechno. Smyčka kreslení neběží, zvuk se uspí a stránka n
 
 Stav kolonie se ukládá do prohlížeče (IndexedDB) každých 20 sekund, při pauze a při zavření nebo skrytí okna. Při příštím otevření se nabídne Pokračovat a svět naváže přesně tam, kde skončil, včetně pohledu a sledovaného mravence. Dokud na Pokračovat neklikneš, stojí. Čas, kdy byla stránka zavřená, se nedohání. Tlačítko Nový svět uložený stav smaže a začne znovu. Svět otevřený se semínkem v adrese (`#5`) má vlastní uloženou pozici, takže hlavní kolonii nepřepíše.
 
-Uložený stav patří k adrese, ze které stránka běží. Na jiné adrese nebo portu začíná kolonie od začátku.
+Uložený stav patří k adrese, ze které stránka běží. Kopie otevřená z jiné adresy nebo ze souboru na disku má svou vlastní kolonii.
 
 Texty jsou česky a anglicky. Jazyk se vybere podle nastavení systému (čeština i pro slovenštinu, jinak angličtina) a tlačítkem v liště ho jde přepnout. Volba se pamatuje, stejně jako rychlost, zvuk a popisky.
 
 ## Instalace jako aplikace (PWA)
 
-Vedle `index.html` leží `manifest.webmanifest`, `sw.js` a ikony. Díky nim jde stránku nainstalovat jako samostatnou aplikaci. Prohlížeč to dovolí jen ze serveru (https nebo localhost), ne ze souboru na disku:
+Otevři [živou stránku](https://daliborkania-info.github.io/anthill/) v Chromu nebo Edgi a v adresním řádku zvol Instalovat. Na telefonu je to v nabídce prohlížeče položka Přidat na plochu. Service worker si stránku uloží, takže nainstalovaná aplikace naběhne i bez připojení, a kdykoli je online, vezme si aktuální verzi.
 
-```bash
-python3 -m http.server 8765 --bind 127.0.0.1
-```
-
-Potom otevři `http://localhost:8765/` v Chromu nebo Edgi a v adresním řádku zvol Instalovat. Service worker si stránku uloží, takže nainstalovaná aplikace naběhne i ve chvíli, kdy server neběží. Když server běží, vezme si z něj aktuální verzi.
+Soubory, které to umožňují, leží vedle `index.html`: `manifest.webmanifest`, `sw.js` a ikony.
 
 ## Co se tam děje
 
@@ -73,7 +73,7 @@ V repozitáři je připravený workflow `.github/workflows/pages.yml`. Sestaví 
 gh workflow run pages.yml
 ```
 
-Stránka pak běží na `https://daliborkania-info.github.io/anthill/` a z této adresy ji jde i nainstalovat jako aplikaci, bez vlastního serveru.
+Stránka pak běží na [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
 
 ## Úpravy a sestavení
 
