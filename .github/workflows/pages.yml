@@ -1,6 +1,6 @@
-# Sestaví stránku ze zdrojů a vystaví ji na GitHub Pages.
-# Spouští se ručně: záložka Actions, "Publikovat na GitHub Pages", Run workflow (nebo `gh workflow run pages.yml`).
-name: Publikovat na GitHub Pages
+# Builds the page from source and deploys it to GitHub Pages.
+# Run it by hand: Actions tab, "Deploy to GitHub Pages", Run workflow (or `gh workflow run pages.yml`).
+name: Deploy to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -27,10 +27,10 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: source/package-lock.json
-      - name: Sestavit index.html a index.packed.html
+      - name: Build index.html and index.packed.html
         working-directory: source
         run: npm ci && npm run build:packed
-      - name: Připravit obsah webu
+      - name: Collect the site files
         run: mkdir _site && cp index.html index.packed.html manifest.webmanifest sw.js icon-*.png _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

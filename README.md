@@ -1,81 +1,83 @@
-# Mraveniště
+# Anthill
 
-Živý řez mravenčí kolonií v prohlížeči. Půdu, chodby, mravence, rostliny, oblohu i zvuk počítá kód, není tu jediný obrázek ani nahrávka. Celé se to vejde do jednoho HTML souboru o velikosti 62 kB (27 kB po gzipu).
+English · [Česky](README.cs.md) · [Deutsch](README.de.md)
 
-Inspirace: [Abyssal Garden](https://github.com/Noniv/abyssal-garden), podmořský svět v jednom souboru o 97 kB.
+A living cross-section of an ant colony in the browser. The soil, the tunnels, the ants, the plants, the sky and the sound are all computed by code. There is not a single image or recording. The whole thing fits into one HTML file of 62 kB (27 kB gzipped).
 
-## Spuštění
+Inspired by [Abyssal Garden](https://github.com/Noniv/abyssal-garden), an underwater world in a single 97 kB file.
 
-Otevři `index.html` v prohlížeči (Chrome, Edge, Firefox, Safari; stačí WebGL 2). Nic se neinstaluje a funguje to offline.
+## Running it
 
-`index.packed.html` je tentýž program, jen je skript zabalený a v prohlížeči se sám rozbalí. Má 38 kB.
+Open `index.html` in a browser (Chrome, Edge, Firefox, Safari; WebGL 2 is all it needs). Nothing to install, and it works offline.
 
-Svět je daný semínkem. `index.html#5` vygeneruje pokaždé stejnou krajinu, bez čísla vznikne náhodná.
+`index.packed.html` is the same program with the script compressed. It unpacks itself in the browser and weighs 38 kB.
 
-## Ovládání
+The world is defined by a seed. `index.html#5` generates the same landscape every time, without a number you get a random one.
 
-| Akce | Jak |
+## Controls
+
+| Action | How |
 |---|---|
-| Posun | tažení myší nebo prstem |
-| Přiblížení | kolečko, dva prsty, klávesy `+` a `-` |
-| Sledovat mravence | klik na mravence nebo královnu, `Esc` sledování zruší |
-| Hodit kolonii drobek | klik do vzduchu nad zemí |
-| Rychlost času | `1` až `4` (1×, 4×, 16×, 48×) |
-| Úplná pauza | mezerník nebo tlačítko Pauza |
-| Popisky komor, plán stavby, zvuk | `L`, `P`, `M` |
-| Jazyk, nový svět | tlačítka v dolní liště |
+| Pan | drag with the mouse or a finger |
+| Zoom | mouse wheel, two fingers, keys `+` and `-` |
+| Follow an ant | click an ant or the queen, `Esc` stops following |
+| Drop the colony a crumb | click the air above the ground |
+| Speed of time | `1` to `4` (1×, 4×, 16×, 48×) |
+| Full pause | Space or the Pause button |
+| Chamber labels, building plan, sound | `L`, `P`, `M` |
+| Language, new world | buttons in the bottom bar |
 
-Panel s čísly i lišta s tlačítky se po 15 sekundách bez pohybu myši, dotyku nebo klávesy schovají a s nimi i kurzor. Stačí pohnout myší a jsou zpět.
+The stats panel and the button bar hide after 15 seconds without mouse movement, touch or a key press, and the cursor hides with them. Move the mouse and they are back.
 
-## Pauza, ukládání a jazyk
+## Pause, saving and language
 
-Pauza zastaví všechno. Smyčka kreslení neběží, zvuk se uspí a stránka nezatěžuje procesor ani grafickou kartu. Posun, přiblížení nebo změna velikosti okna během pauzy překreslí jediný snímek.
+Pause stops everything. The render loop does not run, the audio engine is suspended and the page puts no load on the CPU or the GPU. Panning, zooming or resizing the window while paused redraws a single frame.
 
-Stav kolonie se ukládá do prohlížeče (IndexedDB) každých 20 sekund, při pauze a při zavření nebo skrytí okna. Při příštím otevření se nabídne Pokračovat a svět naváže přesně tam, kde skončil, včetně pohledu a sledovaného mravence. Dokud na Pokračovat neklikneš, stojí. Čas, kdy byla stránka zavřená, se nedohání. Tlačítko Nový svět uložený stav smaže a začne znovu. Svět otevřený se semínkem v adrese (`#5`) má vlastní uloženou pozici, takže hlavní kolonii nepřepíše.
+The state of the colony is saved in the browser (IndexedDB) every 20 seconds, on pause, and when the window is closed or hidden. The next time you open the page it offers Continue, and the world picks up exactly where it stopped, including the view and the ant you were following. It stays frozen until you click Continue. Time that passed while the page was closed is not caught up. The New world button deletes the saved state and starts over. A world opened with a seed in the address (`#5`) has its own save slot, so it does not overwrite the main colony.
 
-Uložený stav patří k adrese, ze které stránka běží. Na jiné adrese nebo portu začíná kolonie od začátku.
+The saved state belongs to the address the page runs from. On a different address or port the colony starts from scratch.
 
-Texty jsou česky a anglicky. Jazyk se vybere podle nastavení systému (čeština i pro slovenštinu, jinak angličtina) a tlačítkem v liště ho jde přepnout. Volba se pamatuje, stejně jako rychlost, zvuk a popisky.
+The interface is in Czech and English. The language follows the system setting (Czech for Czech and Slovak, English otherwise) and a button in the bar switches it. The choice is remembered, and so are speed, sound and labels.
 
-## Instalace jako aplikace (PWA)
+## Installing it as an app (PWA)
 
-Vedle `index.html` leží `manifest.webmanifest`, `sw.js` a ikony. Díky nim jde stránku nainstalovat jako samostatnou aplikaci. Prohlížeč to dovolí jen ze serveru (https nebo localhost), ne ze souboru na disku:
+Next to `index.html` there are `manifest.webmanifest`, `sw.js` and the icons. With them the page can be installed as a standalone app. Browsers allow that only from a server (https or localhost), not from a file on disk:
 
 ```bash
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
-Potom otevři `http://localhost:8765/` v Chromu nebo Edgi a v adresním řádku zvol Instalovat. Service worker si stránku uloží, takže nainstalovaná aplikace naběhne i ve chvíli, kdy server neběží. Když server běží, vezme si z něj aktuální verzi.
+Then open `http://localhost:8765/` in Chrome or Edge and choose Install in the address bar. The service worker keeps a copy of the page, so the installed app starts even when the server is not running. When the server is running, it picks up the current version from it.
 
-## Co se tam děje
+## What goes on in there
 
-- Kolonie začíná se šachtou, komorou královny a spižírnou. Další komory si plánuje sama podle toho, co jí chybí (jesle, spižírny, odpočívárny), a dělnice je buňku po buňce vykopou.
-- Vykopanou hlínu vynášejí ven a sypou kolem vchodu, takže roste val s kráterem.
-- Sběračky hledají na povrchu semínka, bobule a mrtvé brouky. Cestou domů značí pachovou stopu, po které jdou další.
-- Královna klade vajíčka, dokud ji chůvy krmí. Chůvy přenášejí plod do jeslí a krmí larvy, z kukel se líhnou světlé mladé dělnice.
-- Střídá se den a noc (jeden den trvá 10 minut při rychlosti 1×). V noci většina sběraček zůstává doma.
+- The colony starts with a shaft, the queen's chamber and a pantry. It plans further chambers on its own according to what it lacks (nurseries, pantries, resting rooms), and the workers dig them out cell by cell.
+- They carry the excavated soil outside and dump it around the entrance, so a mound with a crater grows there.
+- Foragers search the surface for seeds, berries and dead beetles. On the way home they lay a scent trail that others follow.
+- The queen lays eggs as long as the nurses feed her. The nurses move the brood to the nurseries and feed the larvae, and pale young workers hatch from the pupae.
+- Day and night alternate (one day takes 10 minutes at 1× speed). At night most foragers stay home.
 
-## Jak vzniká obraz
+## How the picture is made
 
-- Hlína je jeden shader. Skládá půdní horizonty, hrudky a zrna ve třech měřítkách, oblázky, kameny a kořeny, a každému povrchu dopočítá sklon, takže ho lampa zleva shora nasvítí jako reliéf. Jemná zrna přibývají až s přiblížením.
-- Chodby a komory jsou vykreslené jako vyhloubené žlaby se stínem pod stropem a s denním světlem, které slábne od vchodu.
-- Mravenci, královna, plod, zásoby a rostliny se při startu vymodelují z elipsoidů a válečků do textury s barvou a mapou normál. Při kreslení pak dostávají stejné světlo jako okolí a vrhají měkký stín.
-- Nad zemí svítí slunce nebo měsíc podle denní doby, obloha má mraky, hvězdy, kopce a les na obzoru.
-- Obraz se počítá ve vysokém dynamickém rozsahu a na konci projde bloomem, filmovým tónováním, vinětou a zrnem. Když počítač nestíhá, rozlišení se samo sníží.
+- The soil is one shader. It layers soil horizons, clods and grains at three scales, pebbles, stones and roots, and works out a slope for every surface, so the lamp from the upper left lights it as a relief. Fine grains appear only as you zoom in.
+- Tunnels and chambers are drawn as carved troughs with a shadow under the ceiling and daylight that fades with distance from the entrance.
+- The ants, the queen, the brood, the food and the plants are modelled at start-up from ellipsoids and capsules into a texture with colour and a normal map. When drawn they receive the same light as their surroundings and cast a soft shadow.
+- Above ground the sun or the moon shines depending on the time of day, and the sky has clouds, stars, hills and a tree line on the horizon.
+- The picture is computed in high dynamic range and finishes with bloom, filmic tone mapping, a vignette and grain. When the computer cannot keep up, the resolution drops by itself.
 
-## Publikování na GitHub Pages
+## Publishing to GitHub Pages
 
-V repozitáři je připravený workflow `.github/workflows/pages.yml`. Sestaví stránku ze zdrojů a vystaví ji na GitHub Pages. Spouští se ručně, na GitHubu v záložce Actions (Publikovat na GitHub Pages, Run workflow), nebo z příkazové řádky:
+The repository contains a ready workflow, `.github/workflows/pages.yml`. It builds the page from source and deploys it to GitHub Pages. It is started by hand, on GitHub in the Actions tab (Deploy to GitHub Pages, Run workflow), or from the command line:
 
 ```bash
 gh workflow run pages.yml
 ```
 
-Stránka pak běží na `https://daliborkania-info.github.io/mraveniste/` a z této adresy ji jde i nainstalovat jako aplikaci, bez vlastního serveru.
+The page then runs at `https://daliborkania-info.github.io/anthill/` and can be installed as an app from that address, with no server of your own.
 
-## Úpravy a sestavení
+## Editing and building
 
-Čitelný zdroj je ve složce `source`. K sestavení je potřeba Node.js 18 nebo novější:
+The readable source is in the `source` folder. Building needs Node.js 18 or newer:
 
 ```bash
 cd source
@@ -83,18 +85,20 @@ npm install
 npm run build
 ```
 
-`npm run build:readable` zapíše neminifikovanou verzi pro ladění, `npm run build:packed` navíc vyrobí `index.packed.html`.
+`npm run build:readable` writes an unminified version for debugging, `npm run build:packed` also produces `index.packed.html`.
 
-Ikony se dělají z `source/icon.svg` nástrojem `rsvg-convert` (velikosti 192 a 512, varianta `icon-maskable.png` je tatáž kresba bez zaoblených rohů).
+The icons are made from `source/icon.svg` with `rsvg-convert` (sizes 192 and 512; `icon-maskable.png` is the same drawing without rounded corners).
 
-| Soubor | Co v něm je |
+Comments in the source code are in Czech.
+
+| File | What is in it |
 |---|---|
-| `source/src/sim.js` | Svět, plánování hnízda, hledání cest a chování kolonie, uložení a obnova stavu. Jde pustit i v Node. |
-| `source/src/prefs.js` | Zapamatované volby a texty v obou jazycích |
-| `source/src/store.js` | Uložený svět v IndexedDB, při startu ho načte nebo založí nový |
-| `source/src/bake.js` | Modely mravenců, plodu, potravy a rostlin, které se při startu vypočítají do textury |
-| `source/src/gfx.js` | Shader půdy, chodeb a oblohy, nasvícené sprity se stíny, závěrečné úpravy obrazu |
-| `source/src/audio.js` | Zvuk skládaný za běhu |
-| `source/src/main.js` | Kamera, ovládání, pauza, ukládání, skrývání panelů, panel s čísly |
-| `source/template.html` | Stránka kolem simulace a její styly |
-| `manifest.webmanifest`, `sw.js`, `icon-*.png` | Soubory pro instalaci jako aplikace |
+| `source/src/sim.js` | The world, nest planning, pathfinding and colony behaviour, saving and restoring state. Runs in Node too. |
+| `source/src/prefs.js` | Remembered settings and the texts in both languages |
+| `source/src/store.js` | The saved world in IndexedDB; loads it at start-up or creates a new one |
+| `source/src/bake.js` | Models of ants, brood, food and plants, computed into a texture at start-up |
+| `source/src/gfx.js` | The shader for soil, tunnels and sky, lit sprites with shadows, post-processing |
+| `source/src/audio.js` | Sound synthesised at run time |
+| `source/src/main.js` | Camera, controls, pause, saving, hiding the panels, the stats panel |
+| `source/template.html` | The page around the simulation and its styles |
+| `manifest.webmanifest`, `sw.js`, `icon-*.png` | Files for installing it as an app |
