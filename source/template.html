@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#140c06">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Mraveniště</title>
+<style>
+:root { --ink: #f6ead6; --dim: #c9b596; --glass: rgba(28, 17, 9, .62); --line: rgba(255, 226, 180, .16); --gold: #f1c06b; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #140c06; color: var(--ink); font: 13px/1.35 system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-user-select: none; user-select: none; }
+canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; transition: filter .8s; }
+#o { cursor: grab; }
+#o:active { cursor: grabbing; }
+.card { position: fixed; background: var(--glass); border: 1px solid var(--line); border-radius: 12px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: opacity .6s; }
+#hud { top: 14px; left: 14px; padding: 12px 15px 11px; min-width: 212px; }
+h1, h2 { margin: 0; font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-weight: 600; letter-spacing: .01em; }
+h1 { font-size: 19px; }
+#ck { color: var(--dim); font-variant-numeric: tabular-nums; margin: 1px 0 9px; }
+dl { display: grid; grid-template-columns: 1fr auto; gap: 3px 16px; margin: 0; }
+dt { color: var(--dim); }
+dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+#bar { bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; padding: 5px; max-width: calc(100vw - 20px); }
+button { font: inherit; color: var(--ink); background: none; border: 0; border-radius: 8px; padding: 7px 11px; cursor: pointer; white-space: nowrap; }
+button:hover { background: rgba(255, 226, 180, .1); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+button.on { background: rgba(241, 192, 107, .22); color: #ffe2a8; }
+#bar i { width: 1px; background: var(--line); margin: 4px 3px; }
+#info { top: 14px; left: 50%; transform: translateX(-50%); padding: 8px 14px; max-width: calc(100vw - 20px); text-align: center; }
+#menu { position: fixed; inset: 0; display: none; place-items: center; padding: 20px; background: radial-gradient(ellipse at center, rgba(20, 12, 6, .35), rgba(20, 12, 6, .8)); }
+#menu div { max-width: 460px; text-align: center; }
+h2 { font-size: clamp(40px, 9vw, 68px); line-height: 1; text-shadow: 0 2px 24px rgba(0, 0, 0, .6); }
+#menu p { font-size: 15px; color: #e9d9bd; margin: 14px 0 22px; text-wrap: balance; }
+#go { font-size: 16px; font-weight: 600; padding: 12px 26px; border-radius: 999px; background: var(--gold); color: #2a1706; }
+#go:hover { background: #ffd58a; }
+#nw { display: block; margin: 10px auto 0; color: var(--dim); }
+#menu small { display: block; margin-top: 22px; color: var(--dim); line-height: 1.6; text-wrap: balance; }
+#menu #sv { margin-top: 12px; }
+[hidden] { display: none !important; }
+.l #menu { display: grid; }
+.l canvas { filter: blur(5px) brightness(.8); }
+.l .card, .h .card { opacity: 0; pointer-events: none; }
+.h #o { cursor: none; }
+@media (max-width: 640px) {
+  #hud { padding: 9px 11px; min-width: 0; }
+  #hud dt:nth-of-type(n+4), #hud dd:nth-of-type(n+4) { display: none; }
+  #bar { flex-wrap: wrap; justify-content: center; }
+  #info { top: auto; bottom: 112px; }
+}
+@media (prefers-reduced-motion: reduce) { canvas, .card { transition: none; } }
+</style>
+</head>
+<body class="l">
+<canvas id="g"></canvas><canvas id="o"></canvas>
+<div id="hud" class="card">
+  <h1 data-t="title">Mraveniště</h1><div id="ck"></div>
+  <dl>
+    <dt data-t="workers"></dt><dd id="s0"></dd>
+    <dt data-t="brood"></dt><dd id="s1"></dd>
+    <dt data-t="food"></dt><dd id="s2"></dd>
+    <dt data-t="rooms"></dt><dd id="s3"></dd>
+    <dt data-t="jobs"></dt><dd id="s4"></dd>
+  </dl>
+</div>
+<div id="info" class="card" hidden></div>
+<div id="bar" class="card">
+  <button id="b0" data-h="space"></button><i></i><button data-s="1">1×</button><button data-s="4">4×</button><button data-s="16">16×</button><button data-s="48">48×</button><i></i>
+  <button id="bl" title="L" data-t="labels"></button><button id="bp" title="P" data-t="plan"></button><button id="bs" title="M" data-t="sound"></button><i></i>
+  <button id="bn" data-t="fresh"></button><button id="bg" data-t="other" title="Jazyk / Language"></button>
+</div>
+<div id="menu"><div>
+  <h2 data-t="title">Mraveniště</h2>
+  <p data-t="sub"></p>
+  <button id="go"></button>
+  <button id="nw" data-t="fresh" hidden></button>
+  <small id="sv"></small>
+  <small id="s" data-t="help"></small>
+</div></div>
+<script>/*SCRIPT*/</script>
+</body>
+</html>

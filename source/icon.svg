@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Ikona aplikace: řez půdou, chodba a prosvětlená komora s mravencem. PNG se z ní dělají příkazy v README. -->
+  <defs>
+    <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#553519"/><stop offset="1" stop-color="#1d1008"/></linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fa8d8"/><stop offset="1" stop-color="#f3d9a4"/></linearGradient>
+    <radialGradient id="glow" cx=".42" cy=".36" r=".75"><stop offset="0" stop-color="#ffe2a0"/><stop offset=".7" stop-color="#e2a24a"/><stop offset="1" stop-color="#b87428"/></radialGradient>
+    <clipPath id="r"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect width="512" height="512" fill="url(#soil)"/>
+    <rect width="512" height="96" fill="url(#sky)"/>
+    <path d="M0 100 Q64 84 128 96 T256 94 T384 98 T512 92 V122 H0Z" fill="#5c8f33"/>
+    <path d="M0 112 Q64 100 128 110 T256 108 T384 112 T512 106 V130 H0Z" fill="#553519"/>
+    <path d="M352 104 C366 150 316 176 330 232" fill="none" stroke="#c98a36" stroke-width="46" stroke-linecap="round"/>
+    <ellipse cx="256" cy="322" rx="184" ry="116" fill="#120a05" opacity=".45" transform="translate(0 10)"/>
+    <ellipse cx="256" cy="322" rx="184" ry="116" fill="url(#glow)"/>
+    <g fill="#1c0e05" stroke="#1c0e05" stroke-linecap="round" stroke-linejoin="round">
+      <g fill="none" stroke-width="10">
+        <path d="M292 330 L322 358 L340 404"/><path d="M298 326 L340 346 L370 392"/>
+        <path d="M272 336 L270 372 L288 408"/><path d="M266 336 L246 374 L250 410"/>
+        <path d="M252 332 L218 362 L196 408"/><path d="M248 328 L204 350 L160 396"/>
+        <path d="M352 282 L378 248 L410 256" stroke-width="7"/><path d="M342 278 L358 240 L390 232" stroke-width="7"/>
+      </g>
+      <ellipse cx="170" cy="318" rx="66" ry="46" transform="rotate(-8 170 318)" stroke="none"/>
+      <circle cx="238" cy="330" r="12" stroke="none"/>
+      <ellipse cx="274" cy="318" rx="42" ry="25" transform="rotate(-6 274 318)" stroke="none"/>
+      <ellipse cx="338" cy="298" rx="31" ry="27" transform="rotate(-18 338 298)" stroke="none"/>
+      <path d="M362 306 L384 318 L366 322Z" stroke-width="4"/>
+    </g>
+    <ellipse cx="156" cy="298" rx="30" ry="12" fill="#fff" opacity=".16" transform="rotate(-14 156 298)"/>
+  </g>
+</svg>

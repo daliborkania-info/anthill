@@ -1,0 +1,14 @@
+{
+  "name": "mraveniste",
+  "private": true,
+  "description": "Procedurální simulace mraveniště v řezu, složená do jednoho HTML souboru",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:readable": "node build.mjs --readable",
+    "build:packed": "node build.mjs --packed"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
