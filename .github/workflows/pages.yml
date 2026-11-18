@@ -1,8 +1,13 @@
 # Builds the page from source and deploys it to GitHub Pages.
-# Run it by hand: Actions tab, "Deploy to GitHub Pages", Run workflow (or `gh workflow run pages.yml`).
+# Runs on every push to main (changes to the READMEs alone are skipped) and can also be started by hand:
+# Actions tab, "Deploy to GitHub Pages", Run workflow (or `gh workflow run pages.yml`).
 name: Deploy to GitHub Pages
 
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'README*.md'
   workflow_dispatch:
 
 permissions:

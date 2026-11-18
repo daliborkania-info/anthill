@@ -69,13 +69,13 @@ Die Dateien, die das möglich machen, liegen neben `index.html`: ein Manifest je
 
 ## Veröffentlichen auf GitHub Pages
 
-Im Repository liegt ein fertiger Workflow, `.github/workflows/pages.yml`. Er baut die Seite aus den Quellen und stellt sie auf GitHub Pages bereit. Gestartet wird er von Hand, auf GitHub im Reiter Actions (Deploy to GitHub Pages, Run workflow) oder von der Kommandozeile:
+Der Workflow `.github/workflows/pages.yml` baut die Seite aus den Quellen und stellt sie bei jedem Push nach `main` auf GitHub Pages bereit. Ein Push, der nur die READMEs ändert, wird übersprungen. Er lässt sich auch von Hand starten, auf GitHub im Reiter Actions (Deploy to GitHub Pages, Run workflow) oder von der Kommandozeile:
 
 ```bash
 gh workflow run pages.yml
 ```
 
-Die Seite läuft dann unter [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
+Die Seite läuft unter [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
 
 ## Ändern und Bauen
 

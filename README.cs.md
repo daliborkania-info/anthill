@@ -69,13 +69,13 @@ Soubory, které to umožňují, leží vedle `index.html`: manifest pro každý 
 
 ## Publikování na GitHub Pages
 
-V repozitáři je připravený workflow `.github/workflows/pages.yml`. Sestaví stránku ze zdrojů a vystaví ji na GitHub Pages. Spouští se ručně, na GitHubu v záložce Actions (Deploy to GitHub Pages, Run workflow), nebo z příkazové řádky:
+Workflow `.github/workflows/pages.yml` sestaví stránku ze zdrojů a vystaví ji na GitHub Pages při každém pushi do `main`. Push, který mění jen README, se přeskočí. Jde spustit i ručně, na GitHubu v záložce Actions (Deploy to GitHub Pages, Run workflow), nebo z příkazové řádky:
 
 ```bash
 gh workflow run pages.yml
 ```
 
-Stránka pak běží na [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
+Stránka běží na [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
 
 ## Úpravy a sestavení
 

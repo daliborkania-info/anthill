@@ -69,13 +69,13 @@ The files that make this possible sit next to `index.html`: one manifest per lan
 
 ## Publishing to GitHub Pages
 
-The repository contains a ready workflow, `.github/workflows/pages.yml`. It builds the page from source and deploys it to GitHub Pages. It is started by hand, on GitHub in the Actions tab (Deploy to GitHub Pages, Run workflow), or from the command line:
+The workflow `.github/workflows/pages.yml` builds the page from source and deploys it to GitHub Pages on every push to `main`. Pushes that only touch the READMEs are skipped. It can also be started by hand, on GitHub in the Actions tab (Deploy to GitHub Pages, Run workflow), or from the command line:
 
 ```bash
 gh workflow run pages.yml
 ```
 
-The page then runs at [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
+The page runs at [daliborkania-info.github.io/anthill](https://daliborkania-info.github.io/anthill/).
 
 ## Editing and building
 
